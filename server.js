@@ -2,6 +2,8 @@ const express = require('express');
 const hbs = require('hbs');
 const fs = require('fs');
 
+const port = process.env.PORT || 3000;
+
 var app = express(); //creates an app
 
 hbs.registerPartials(__dirname + '/views/partials');
@@ -15,9 +17,9 @@ app.use((req, res, next) => {
 	next(); //must be called in order for the other middlewear to continue
 });
 
-app.use((req, res, next) => {
-	res.render('maintenance.hbs');
-});
+// app.use((req, res, next) => {
+// 	res.render('maintenance.hbs');
+// });
 
 //takes the middlewear function you want to use
 app.use(express.static(__dirname+ '/public')); //__dirname holds the directory where your project is held
@@ -71,6 +73,6 @@ app.get('/bad', (req, res) => {
 })
 
 //binds the application to a part on the machine
-app.listen(3000, () => {
-	console.log('Server is up on port 3000');
+app.listen(port, () => {
+	console.log(`Server is up on port ${port}`);
 }); //the local host
